@@ -143,6 +143,21 @@ app
     });
   });
 
-app.listen(8080, () => {
+app.get("/chat", (req, res) => {
+  res.render("chat");
+});
+
+let server = app.listen(8080, () => {
   console.log("Server started successfuly on por 8080");
+});
+
+let io = require("socket.io");
+let server_io = io(server);
+
+server_io.on("connection", (socket) => {
+  console.log("A user connected");
+  socket.emit("welcome", "Welcome to the chat!");
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
+  });
 });
