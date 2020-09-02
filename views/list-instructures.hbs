@@ -1,0 +1,21 @@
+<h3>Listado de instructores</h3>
+<table class="uk-table uk-table-striped uk-table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad de cursos</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list_instructures}}
+        <tr>
+            <td>{{this.Nombre}}</td>
+            <td>{{this.CantidadCursos}}</td>
+            <td>
+                <a href="/editar-instructure?id={{_id}}">Editar</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
