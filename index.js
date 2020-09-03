@@ -154,10 +154,19 @@ let server = app.listen(8080, () => {
 let io = require("socket.io");
 let server_io = io(server);
 
+let clients_connected = [];
+
 server_io.on("connection", (socket) => {
   console.log("A user connected");
+  clients_connected.push(socket);
   socket.emit("welcome", "Welcome to the chat!");
   socket.on("disconnect", () => {
+    //Lógica de remover cliente del array
     console.log("User disconnected");
+  });
+
+  socket.on("chat message", (message) => {
+    console.log("Message recived: " + message);
+    server_io.emit("chat message", message);
   });
 });
